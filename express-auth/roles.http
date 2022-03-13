@@ -1,0 +1,44 @@
+### 角色增删改查
+@baseUrl = http://localhost:6001
+
+### 获取所有角色
+GET {{baseUrl}}/roles
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+
+### 添加用户角色
+POST {{baseUrl}}/roles/add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+
+{
+  "role_name": "运营",
+  "description": "运营人员"
+}
+
+### 编辑角色
+POST {{baseUrl}}/roles/edit
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+
+{
+  "id": "622d810a455440af74a4d4af",
+  "role_name": "HR",
+  "description": "招聘人员"
+}
+
+### 删除角色
+POST {{baseUrl}}/roles/delete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+
+{
+  "id": "622d810a455440af74a4d4af"
+} 
+
+### 获取权限列表
+GET {{baseUrl}}/roles/list
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+
+### 获取菜单栏
+GET {{baseUrl}}/roles/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo

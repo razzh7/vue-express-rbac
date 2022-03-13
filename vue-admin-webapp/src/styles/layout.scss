@@ -1,0 +1,121 @@
+#app {
+
+  .sidebar-container { // 菜单栏
+    transition: width .28s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999; // 优先级高于移动环境下的遮罩层
+    width: $sideBarWidth;
+    height: 110vh;
+    background-color: #021423;
+    overflow: hidden;
+    // reset elementUI style
+    .scrollbar-wrapper {
+      overflow-x: hidden !important;
+    }
+
+    .el-scrollbar__bar.is-vertical {
+      right: 0px;
+    }
+
+    .el-scrollbar {
+      height: 100%; // 修复菜单栏不能滚动问题
+    }
+    .el-menu {
+      width: 100%;
+      border: none;
+
+      .el-menu-item {
+        &:hover {
+          background-color: transparent !important;
+        }
+        &.is-active {
+          background-color: #0D2B2C !important;
+        }
+        &:hover [class^=el-icon] {
+          color: $menuActiveText !important;
+        }
+        &:hover .menu-title {
+          color: $menuActiveText !important;
+        }
+    }
+      .el-submenu {
+        &.is-active>.el-submenu__title {
+          color: $subMenuActiveText !important;
+          [class^=el-icon] {
+            color: $subMenuActiveText !important;
+          }
+          .el-icon-arrow-down {
+            color: $subMenuActiveText !important;
+          }
+        }
+        .el-submenu__title:hover {
+          background-color: transparent !important;
+        }
+      }
+  }
+  
+  }
+  .main-container {  // 内容主体
+    transition: margin-left .28s;
+    position: relative;
+    min-height: 100%;
+    margin-left: $sideBarWidth;
+  }
+
+  .hideSidebar {   // 收缩sidebar
+    .sidebar-container {
+      // 这里的!importan解决mobile端切换到desktop端过程中的从210px到54px
+      width: 54px !important;
+    }
+
+    .main-container {
+      margin-left: 54px;
+    }
+
+    .el-menu-item,
+    .el-submenu {
+      
+      .menu-title {
+        display: none;
+      }
+    }
+    .el-submenu > .el-submenu .el-icon-arrow-right { // 去除多级标签栏右侧箭头
+      display: none;
+    }
+
+    .el-menu-item [class^='el-icon-'] {
+      text-align: left !important;
+    }
+
+    .el-submenu [class^='el-icon-'] {
+      text-align: left !important;
+    }
+  }
+ // 移动自适应
+  .mobile {
+    .main-container {
+      margin-left: 0;
+    }
+    .sidebar-container {
+      transition: transform .28s;
+      width: $sideBarWidth !important;
+    }
+    &.hideSidebar { // &指的是父级类.mobile
+      .sidebar-container {
+        pointer-events: none; // 禁用鼠标事件
+        transition-duration: 0.3s;
+        transform: translate3d(-$sideBarWidth, 0, 0);
+      }
+    }
+  }
+
+  .withoutAnimation {
+    .sidebar-container, 
+    .main-container {
+      transition: none;
+    }
+  }
+}

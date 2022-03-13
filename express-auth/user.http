@@ -1,0 +1,65 @@
+@baseUrl = http://localhost:6001
+### 首页
+GET  {{baseUrl}}/
+
+### 查看所有用户
+GET {{baseUrl}}/findUsers
+
+### 注册用户
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+  "username": "user2",
+  "password": "123123",
+  "mobile": "13589756757",
+  "email": "136013779@qq.com"
+}
+
+### 登录用户
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123123"
+}
+
+### 获取用户列表
+GET {{baseUrl}}/user/userList
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+
+### 添加用户
+POST {{baseUrl}}/user/add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+
+{
+  "username": "user3",
+  "password": "123123",
+  "mobile": "4235324534",
+  "email": "1234534564@qq.com"
+}
+
+### 编辑用户
+POST {{baseUrl}}/user/edit
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+
+{
+  "id": "622d6630e0ed76985068f9b4",
+  "username": "测试",
+  "password": "123123",
+  "mobile": "13566073982",
+  "email": "uu@qq.com",
+  "role": "测试人员"
+}
+
+### 删除用户
+POST {{baseUrl}}/user/delete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+
+{
+  "id": "622d4d616cbc1cbc7b62de7e"
+}
