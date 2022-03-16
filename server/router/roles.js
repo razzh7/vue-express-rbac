@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const auth = require('../utils/auth')
 const Roles = require('../model/roles')
-const Menu = require('../model/profile')
+const Menu = require('../model/menu')
 const utils = require('../utils/data')
 
 // 获取所有角色
@@ -59,7 +59,7 @@ router.get('/roles/auth', auth.verifyToken, async(req, res) => {
             "pid": '0'
         }
       },
-  ]).project({_id: 0, pid: 0})
+  ])
   return res.send(utils.datas(0, menu, '获取用户菜单成功！'))
 })
 

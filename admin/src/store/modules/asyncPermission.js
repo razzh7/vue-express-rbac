@@ -2,8 +2,11 @@ import { commonRoutes } from "@/router"
 
 const map = {
   Layout: () => import('@/layout'),
-  user: () => import('@/views/permission/users/index.vue'),
-  roles: () => import('@/views/permission/roles/index.vue')
+  user: () => import('@/views/permission/users/index'),
+  roles: () => import('@/views/permission/roles/index'),
+  mixin: () => import('@/views/components/mixin/index'),
+  upload: () => import('@/views/components/upload/index'),
+  table: () => import('@/views/table/index')
 }
 
 const state = {
@@ -23,6 +26,7 @@ const actions = {
     return new Promise(resolve => {
       console.log(Menu)
       const asyncRoutes = delIdAndPidAndMapComponent(Menu)
+      console.log('生成的routes',asyncRoutes)
       commit('SET_ROUTES', asyncRoutes)
       resolve(asyncRoutes)
     })
@@ -36,7 +40,7 @@ function delIdAndPidAndMapComponent(Menu) {
     const icon = Menu[i].icon
     const title = Menu[i].title
     if (Menu[i].children) {
-      delIdAndPidAndMapComponent(Menu[i].children)
+      Menu[i].children = delIdAndPidAndMapComponent(Menu[i].children)
     }
     if (mapName) {
       Menu[i].component = map[mapName]
@@ -47,8 +51,8 @@ function delIdAndPidAndMapComponent(Menu) {
         title
       }
     }
-    delete Menu[i]['_id']
-    delete Menu[i]['pid']
+    // delete Menu[i]['_id']
+    // delete Menu[i]['pid']
   }
 
   return Menu

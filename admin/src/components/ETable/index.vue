@@ -41,8 +41,7 @@
         <!-- 自定义列 -->
         <el-table-column
           v-else-if="column.customColumn"
-          :key="index"
-          :label="column.customColumn.label"
+          v-bind="column.customColumn"
           align="center">
           <template slot-scope="scope">
             <custom

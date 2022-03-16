@@ -21,7 +21,8 @@ import {
   TableColumn,
   Dialog,
   Tag,
-  Message
+  Message,
+  Card
 } from "element-ui";
 
 Vue.use(Form)
@@ -45,6 +46,7 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Tag)
 Vue.use(Dialog)
+Vue.use(Card)
 
 // message不需要使用Vue.use 否则刷新页面会自动弹窗
 Vue.prototype.$message = Message;

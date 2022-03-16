@@ -24,6 +24,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
             const Menu = await store.dispatch('user/_userInfo') 
+            console.log('我是后台返回的菜单',Menu)
             const accessRoutes = await store.dispatch('asyncPermission/generatorRoutes', Menu)
             console.log(1111,accessRoutes)
             for(let i = 0; i < accessRoutes.length; i++) {

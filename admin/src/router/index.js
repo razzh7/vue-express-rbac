@@ -48,16 +48,17 @@ export const commonRoutes = [
     ]
   },
   nestedModule,
-  {
-    path: '/github', // path中不加/相当于父组件路径/https://github.com/rzhAvenir
-    component: Layout,
-    children: [
-      {
-        path: 'https://github.com/rzhAvenir',
-        meta: { title: 'Github', icon: 'el-icon-info' }
-      }
-    ]
-  }
+  // {
+  //   path: '/github', // path中不加/相当于父组件路径/https://github.com/rzhAvenir
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'https://github.com/rzhAvenir',
+  //       meta: { title: 'Github', icon: 'el-icon-info' }
+  //     }
+  //   ]
+  // },
+  { path: '*', redirect: '/404', hidden: true }
 ]
 export const asyncRoutes = [
   {
@@ -72,19 +73,6 @@ export const asyncRoutes = [
       }
     ]
   },
-  // {
-  //   path: '/permission',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'assign',
-  //       name: 'Assign',
-  //       component: () => import('@/views/permission'),
-  //       meta: { title: '权限分配', icon: 'el-icon-lock', roles: ['admin'] }
-  //     }
-  //   ]
-  // },
-  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => {
