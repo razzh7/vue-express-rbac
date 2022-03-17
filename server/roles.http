@@ -18,21 +18,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZ
 ### 编辑角色
 POST {{baseUrl}}/roles/edit
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzUyNzE4NiwiZXhwIjoxNjQ3ODg3MTg2fQ._BfWKAjsu59kBX_KsjbGHISoTnIczkmqEzspHtFq2d4
 
 {
-  "id": "622d810a455440af74a4d4af",
-  "role_name": "HR",
-  "description": "招聘人员"
+  "id": "622d80b9236d4401cda4fc17",
+  "role_name": "医务人员"
 }
 
 ### 删除角色
 POST {{baseUrl}}/roles/delete
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzUyNzE4NiwiZXhwIjoxNjQ3ODg3MTg2fQ._BfWKAjsu59kBX_KsjbGHISoTnIczkmqEzspHtFq2d4
 
 {
-  "id": "622d810a455440af74a4d4af"
+  "id": "62333899a160ee910b11e17f"
 } 
 
 ### 获取权限列表

@@ -1,62 +1,73 @@
 <template>
   <div class="roles-container">
     <el-card>
-      <e-table 
-        :data="roleList"
-        :columns="columns"
+      <el-button class="addRoles" @click="addRoles">添加角色</el-button>
+      <el-table
+        :data="roleData"
+        stripe
         border
-        stripe/>
+        >
+        <el-table-column prop="role_name" label="角色名称" align="center" />
+        <el-table-column prop="description" label="角色说明" align="center" />
+        <el-table-column prop="add_time" label="添加时间" align="center" />
+        <el-table-column label="操作" align="center">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="doAuth(scope.row)">授权</el-button>
+            <el-button
+              size="mini"
+              @click="editRole(scope.row)">编辑</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="deleteRole(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </el-card>
+    <el-dialog
+      :title="txt[dialogStatus]"
+      :visible.sync="dilogIsShow"
+      width="25%">
+        <el-form
+          ref="rolesForm"
+          label-width="120"
+          label-position="left">
+          <el-form-item label="角色名称">
+            <el-input v-model="rolesForm.role_name" palceholder="请输入角色名称"></el-input>
+          </el-form-item>
+          <el-form-item label="角色说明">
+            <el-input v-model="rolesForm.description" palceholder="请输入角色说明"></el-input>
+          </el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogStatus==='create'?comfirmAddRoles():comfirmEditRoles()">确 定</el-button>
+        </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { roleList } from '@/api/roles'
-import ETable from "@/components/ETable"
+import { roleList, roleAdd, roleEdit, roleDelete } from '@/api/roles'
+import { Message } from "element-ui"
+import { Notification } from 'element-ui';
 export default {
-  components: { ETable },
   data() {
     return {
-      roleList: [],
-      columns: [
-        {
-          isIndex: { type: "index", width: 80, label: "序号", isPagination: false } // isPagination是否开启分页随页数自增
-        },
-        {
-          attrs: { label: "角色名称", prop: "role_name" }
-        },
-        {
-          attrs: { label: "角色说明" , prop: "description" }
-        },
-        {
-          attrs: { label: "添加时间" , prop: "add_time" }
-        },
-        {
-          operation: {
-            label: "操作",
-            width: 260,
-            btnList: [
-              {
-                name: "授权", // 操作节点名称
-                type: "primary", // 按钮类型
-                handleCb: this.doAuth
-              },
-              {
-                name: "编辑", // 操作节点名称
-                type: "danger", // 按钮类型
-                icon: "el-icon-edit",
-                handleCb: this.editRole
-              },
-              {
-                name: "删除", // 操作节点名称
-                type: "warning", // 按钮类型
-                icon: "el-icon-upload",
-                handleCb: this.deleteRole
-              }
-            ],
-          }
-        }
-      ]
+      dialogStatus: '',
+      txt: {
+        create: '添加角色',
+        edit: '编辑角色'
+      },
+      dialogType: 'new',
+      dilogIsShow: false,
+      roleData: [],
+      rolesForm: {
+        role_name: '',
+        description: ''
+      }
     }
   },
   created() {
@@ -65,18 +76,65 @@ export default {
   methods: {
     async getRolesList() {
       const res = await roleList()
-      if (res.code === 0) {
-        this.roleList = res.data
+      if (res.code === 200) {
+        this.roleData = res.data
       }
     },
-    doAuth(_,row) {
+    resetTemp() {
+      this.rolesForm = {
+        role_name: "",
+        description: ""
+      }
+    },
+    addRoles() {
+      this.resetTemp()
+      this.dialogStatus = 'create'
+      this.dilogIsShow = true
+      this.$nextTick(() => {
+        this.$refs['rolesForm'].clearValidate()
+      })
+    },
+    async comfirmAddRoles() {
+      const role = this.rolesForm
+      const res = await roleAdd(role)
+      if (res.code === 200) {
+        this.getRolesList()
+        Message.success(res.msg)
+        this.dilogIsShow = false
+      }
+    },
+    doAuth(row) {
       console.log('进行授权',row)
     },
-    editRole() {
-      console.log('进行编辑')
+    editRole(row) {
+      this.dialogStatus = 'edit'
+      this.dilogIsShow = true
+      this.rolesForm = Object.assign({}, row)
     },
-    deleteRole() {
-      console.log('进行删除')
+    async comfirmEditRoles() {
+      const { _id, role_name, description} = this.rolesForm
+      const res = await roleEdit({
+        id: _id,
+        role_name,
+        description
+      })
+      if (res.code === 200) {
+        this.getRolesList()
+        Message.success(res.msg)
+        this.dilogIsShow = false
+      }
+    },
+    async deleteRole(row) {
+      const id = row._id
+      console.log('iud',id)
+      const res = await roleDelete({ id })
+      if (res.code === 200) {
+        Notification({
+          title: '提示',
+          message: res.msg,
+        })
+        this.getRolesList()
+      }
     }
   }
 }
@@ -85,5 +143,12 @@ export default {
 <style>
 .roles-container {
   padding: 20px;
+}
+.addRoles {
+  float: right;
+  margin-bottom: 20px;
+}
+.el-input {
+  width: 220px;
 }
 </style>
