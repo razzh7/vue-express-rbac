@@ -45,15 +45,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhY
 ### 编辑用户
 POST {{baseUrl}}/user/edit
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
 
 {
-  "id": "622d6630e0ed76985068f9b4",
-  "username": "测试",
-  "password": "123123",
-  "mobile": "13566073982",
-  "email": "uu@qq.com",
-  "role": "测试人员"
+  "id": "62355291504832d3eda1b61a",
+  "username": "送你一123",
+  "mobile": "13562",
+  "email": "qq.com",
+  "role_id": "623542b4ec427e36b8ba95ad",
+  "role_name": "法务"
 }
 
 ### 删除用户

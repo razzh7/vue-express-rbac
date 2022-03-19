@@ -91,10 +91,11 @@ router.post('/user/add', auth.verifyToken, urlencodedParser, async(req, res) => 
 router.post('/user/edit', auth.verifyToken, urlencodedParser, async(req, res) => {
   const { id } = req.body
   try {
-    await Users.findOneAndUpdate({ _id: id }, req.body)
-    res.send(utils.datas(0, null, '修改成功！'))
+    const result = await Users.findOneAndUpdate({ _id: id }, req.body)
+    console.log('我是修改结果',result)
+    res.send(utils.datas(200, null, '修改成功！'))
   } catch(err) {
-    res.send(utils.datas(304, null, err))
+    res.send(utils.datas(400, null, '修改失败'))
   }
 })
 
@@ -104,9 +105,9 @@ router.post('/user/delete', auth.verifyToken, urlencodedParser, async(req, res) 
 
   try {
     await Users.findByIdAndDelete(id)
-    res.send(utils.datas(0, null, '删除成功！'))
+    res.send(utils.datas(200, null, '删除成功！'))
   } catch(err) {
-    res.send(utils.datas(304, null, err))
+    res.send(utils.datas(400, null, err))
   }
 })
 
