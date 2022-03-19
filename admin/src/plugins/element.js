@@ -22,7 +22,9 @@ import {
   Dialog,
   Tag,
   Message,
-  Card
+  Card,
+  Select,
+  Option
 } from "element-ui";
 
 Vue.use(Form)
@@ -47,6 +49,8 @@ Vue.use(TableColumn)
 Vue.use(Tag)
 Vue.use(Dialog)
 Vue.use(Card)
+Vue.use(Select)
+Vue.use(Option)
 
 // message不需要使用Vue.use 否则刷新页面会自动弹窗
 Vue.prototype.$message = Message;

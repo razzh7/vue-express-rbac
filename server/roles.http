@@ -3,7 +3,7 @@
 
 ### 获取所有角色
 GET {{baseUrl}}/roles
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1NjAxOSwiZXhwIjoxNjQ4MDE2MDE5fQ.LRt6GNKXtKUFugIsFWapeUZVvvI775hSfeMqwncmyYs
 
 ### 添加用户角色
 POST {{baseUrl}}/roles/add

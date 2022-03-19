@@ -2,11 +2,7 @@
   <div class="roles-container">
     <el-card>
       <el-button class="addRoles" @click="addRoles">添加角色</el-button>
-      <el-table
-        :data="roleData"
-        stripe
-        border
-        >
+      <el-table :data="roleData" stripe border>
         <el-table-column prop="role_name" label="角色名称" align="center" />
         <el-table-column prop="description" label="角色说明" align="center" />
         <el-table-column prop="add_time" label="添加时间" align="center" />

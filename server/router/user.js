@@ -11,18 +11,19 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // 查看所有用户
 router.get('/findUsers', async(req, res) => {
-  const users = await Users.find()
+  const users = await Users.find().populate('role_id')
   return res.send(users)
 })
 
 // 注册用户
-router.post('/register', async(req, res) => {
-  const { username, password, mobile, email } = req.body
+router.post('/register', urlencodedParser, async(req, res) => {
+  const { username, password, mobile, email, role_id } = req.body
   await Users.create({
     username,
     password,
     mobile,
-    email
+    email,
+    role_id
   })
   return res.send(utils.datas(0, null, '您已成功注册'))
 })
@@ -66,24 +67,28 @@ router.get('/user/profile', auth.verifyToken, async (req, res) => {
 
 // 获取用户列表
 router.get('/user/userList', auth.verifyToken, async (req, res) => {
-  let userList = await Users.find().select("-password -__v") // select: 不返回用户密码和版本号
+  let userList = await Users.find().select("-password -__v").populate('role_id') // select: 不返回用户密码和版本号
   if (userList) {
-    res.send(utils.datas(0, userList))
+    res.send(utils.datas(200, userList))
   } else {
-    res.send(utils.datas(304, userList, '获取失败'))
+    res.send(utils.datas(500, userList, '获取失败'))
   }
 })
 
 // 管理员添加用户
-router.post('/user/add', auth.verifyToken, async(req, res) => {
+router.post('/user/add', auth.verifyToken, urlencodedParser, async(req, res) => {
   const addUser = new Users(req.body)
-  await addUser.save()
-  res.send(utils.datas(0, null, '添加用户成功！'))
+  const result =  await addUser.save()
+  if (result) {
+    res.send(utils.datas(200, null, '添加用户成功！'))
+  } else {
+    res.send(utils.datas(400, null, '添加用户失败'))
+  }
 
 })
 
 // 管理员编辑用户
-router.post('/user/edit', auth.verifyToken, async(req, res) => {
+router.post('/user/edit', auth.verifyToken, urlencodedParser, async(req, res) => {
   const { id } = req.body
   try {
     await Users.findOneAndUpdate({ _id: id }, req.body)
@@ -94,7 +99,7 @@ router.post('/user/edit', auth.verifyToken, async(req, res) => {
 })
 
 // 管理员删除用户
-router.post('/user/delete', auth.verifyToken, async(req, res) => {
+router.post('/user/delete', auth.verifyToken, urlencodedParser, async(req, res) => {
   const { id } = req.body
 
   try {

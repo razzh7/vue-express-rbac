@@ -10,10 +10,11 @@ POST {{baseUrl}}/register
 Content-Type: application/json
 
 {
-  "username": "user2",
+  "username": "kf",
   "password": "123123",
   "mobile": "13589756757",
-  "email": "136013779@qq.com"
+  "email": "136013779@qq.com",
+  "role_id": "622d80b9236d4401cda4fc17"
 }
 
 ### 登录用户
@@ -27,12 +28,12 @@ Content-Type: application/json
 
 ### 获取用户列表
 GET {{baseUrl}}/user/userList
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
 
 ### 添加用户
 POST {{baseUrl}}/user/add
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
 
 {
   "username": "user3",
