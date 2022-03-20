@@ -49,10 +49,9 @@
       菜单
       <el-tree
         ref="tree"
+        :check-strictly="checkStrictly"
         :data="menuTree" 
         :props="defaultProps"
-        @node-click="handleNodeClick"
-        @check="handleNodeCheck"
         node-key="_id"
         show-checkbox
         check-on-click-node>
@@ -82,6 +81,7 @@ export default {
       dialogType: 'new',
       dilogIsShow: false,
       dilogAuthIsShow: false,
+      checkStrictly: false,
       roleData: [],
       rolesForm: {
         role_name: '',
@@ -134,20 +134,18 @@ export default {
       this.dilogAuthIsShow = true
       this.dialogStatus = 'auth'
       this.roleId = row._id
-      console.log('rowId',row)
-      const res = await userInfo({id: this.roleId })
+      const res = await userInfo({ id: this.roleId })
       if (res.code === 0) {
         const { menu, roles_menu } = res.data
         this.menuTree = menu
         this.roles_menu = roles_menu
         this.getMenuId()
         const datas = this.generateArr(menu)
+        this.checkStrictly = true  // bug修复：当父节点选中时，其只有一个子节点选中，但这个时候父节点选中默认全选，导致显示错误，需要设置checkStrictly让父与子不相关联
         this.$nextTick(() => {
           this.$refs['tree'].setCheckedNodes(datas)
+          this.checkStrictly = false // 为true，当用户在勾选权限时，这个时候父与子相关联
         })
-        console.log('我是菜单', this.menuTree)
-        console.log('我是当前角色拥有的菜单权限', roles_menu)
-        console.log('datas',datas)
       }
 
     },
@@ -175,10 +173,15 @@ export default {
       return data
     },
     async comfirmDoAuth() {
+      let parentMenuId = []
       const selectedRoutes = this.$refs['tree'].getCheckedKeys()
+      const halfCheckedNodes = this.$refs['tree'].getHalfCheckedNodes() // 获取当前选中子节点的父节点的Menu_Id数组
+      for(const pid of halfCheckedNodes) {
+        parentMenuId.push(pid._id)
+      }
       const datas = {
         id: this.roleId,
-        menu_node: selectedRoutes
+        menu_node: selectedRoutes.concat(parentMenuId) // 将父和子节点Menu_Id一起提交到后台ROLES_MENU表中
       }
       const res = await doAuthRoleRoutes((datas))
       if (res.code === 200) {
@@ -187,7 +190,6 @@ export default {
       } else {
         Message.error('未执行')
       }
-      console.log('选中的routes', datas)
     },
     editRole(row) {
       this.dialogStatus = 'edit'
@@ -209,7 +211,6 @@ export default {
     },
     async deleteRole(row) {
       const id = row._id
-      console.log('iud',id)
       const res = await roleDelete({ id })
       if (res.code === 200) {
         Notification({
@@ -218,12 +219,6 @@ export default {
         })
         this.getRolesList()
       }
-    },
-    handleNodeClick(data) {
-      // console.log('node',data)
-    },
-    handleNodeCheck(data) {
-      console.log('check', data)
     }
   }
 }

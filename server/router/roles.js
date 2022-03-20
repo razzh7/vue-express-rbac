@@ -30,7 +30,6 @@ router.post('/roles/add', auth.verifyToken, urlencodedParser, async (req, res) =
 // 编辑角色
 router.post('/roles/edit', auth.verifyToken, urlencodedParser, async (req, res) => {
     const { id } = req.body
-    console.log(123,req.body)
     try {
       await Roles.findByIdAndUpdate({ _id: id }, req.body)     
       res.send(utils.datas(200, null, '编辑角色成功！'))
@@ -69,10 +68,7 @@ router.get('/roles/auth', auth.verifyToken, urlencodedParser, async(req, res) =>
 router.post('/roles/authMenu', auth.verifyToken, urlencodedParser, async(req, res) => {
   const result = qs.parse(req.body) // Resolve Error Cast to ObjectId failed for value "" (type string) at path "roles_id" for model "roles_menu"
   const { id } = result
-  // const { id } = req.body
-  console.log('传来啥id啊',id)
   const menu = await Roles_Menu.find({ roles_id: id }).populate('menu_id')
-  console.log('menu', menu)
   if (menu) {
     return res.send(utils.datas(200, menu))
   }
@@ -82,7 +78,6 @@ router.post('/roles/authMenu', auth.verifyToken, urlencodedParser, async(req, re
 router.post('/roles/doAuth', auth.verifyToken, urlencodedParser, async(req, res) => {
   const result = qs.parse(req.body)
   const { id, menu_node } = result
-  console.log('菜单id',menu_node)
   // 1、删除Roles_Menu表中当前角色下的所有权限
 
   await Roles_Menu.deleteMany({roles_id: id })

@@ -45,10 +45,8 @@ const actions = {
       login(formDatas).then(res => {
         if (res.code === 0) {
           const { data } = res;
-          console.log('我是登录',data)
           Message.success(data.user.msg)
           commit('SET_TOKEN', data.user.token)
-          // commit('SET_ROLE_ID', data.user.roles_id)
           localStorage.setItem('roles_id', data.user.roles_id)
           resolve(res)
         } else {
@@ -64,13 +62,10 @@ const actions = {
   _userInfo({ commit }) {
     return new Promise((resolve, reject) => {
       const roleId = localStorage.getItem('roles_id')
-      console.log('肯定罚请求了啊',roleId)
       authMenu({ id: roleId }).then(res => {
         if (res.code === 200) {
           const menu = handleMenu(res.data)
-          console.log(123,menu)
           commit('SET_ASYNC_ROUTER', menu)
-          console.log('我的menu',menu)
           resolve(menu)
         }
       }).catch(err => {

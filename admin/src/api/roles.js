@@ -28,6 +28,5 @@ export function roleDelete(data) {
 // 角色授权
 export function doAuthRoleRoutes(data) {
     const url = '/roles/doAuth'
-    console.log(123142,Qs.stringify(data))
     return $axios.post(url, data)
   }

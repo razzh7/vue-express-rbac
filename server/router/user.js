@@ -93,7 +93,6 @@ router.post('/user/edit', auth.verifyToken, urlencodedParser, async(req, res) =>
   const { id } = req.body
   try {
     const result = await Users.findOneAndUpdate({ _id: id }, req.body)
-    console.log('我是修改结果',result)
     res.send(utils.datas(200, null, '修改成功！'))
   } catch(err) {
     res.send(utils.datas(400, null, '修改失败'))

@@ -24,10 +24,8 @@ const mutations = {
 const actions = {
   generatorRoutes({ commit }, Menu) {
     return new Promise(resolve => {
-      console.log(Menu)
       const asyncRoutes = formatRouterTree(delIdAndPidAndMapComponent(Menu))
       asyncRoutes.push({ path: '*', redirect: '/404', hidden: true }) // 加入404页面
-      console.log('生成的routes',asyncRoutes)
       commit('SET_ROUTES', asyncRoutes)
       resolve(asyncRoutes)
     })
@@ -55,7 +53,12 @@ function delIdAndPidAndMapComponent(Menu) {
 
   return Menu
 }
-
+/**
+ * 
+ * @param pid
+ * pid: 0 父级菜单
+ * pid: !0 子级菜单
+ */
 function formatRouterTree(routes) {
   let parents = routes.filter(p => p.pid == 0) // 找到所有顶级节点
   let children = routes.filter(c => c.pid != 0)

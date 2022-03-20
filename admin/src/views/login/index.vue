@@ -54,7 +54,6 @@ export default {
         if (valid) {
           this.$store.dispatch('user/_login',this.loginInfo).then(res => {
             if (res.code === 0 ) {
-              console.log('我是path',this.$route.query.redirect)
               this.$router.push({ path:this.$route.query.redirect }).catch((e) => e)
             }
           })
