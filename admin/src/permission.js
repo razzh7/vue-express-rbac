@@ -19,6 +19,7 @@ router.beforeEach(async (to, from, next) => {
     const hasToken = getToken()
     if (hasToken) {
       const hasAsyncRouter = store.getters.asyncRouter && store.getters.asyncRouter.length > 0
+      console.log('动态路由刷新后还存在吗？', hasAsyncRouter)
       if (hasAsyncRouter) {
         next()
       } else {

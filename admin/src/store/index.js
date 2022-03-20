@@ -22,10 +22,13 @@ files.keys().forEach(key => {
   modules[name] = files(key).default || files(key)
 })
 console.log('我是导入的模块',modules)
-
+const dataState = createPersistedState({
+  paths: ['asyncPermission.routes', 'asyncPermission.asyncRoutes', 'user.role_id']
+})
 const store = new Vuex.Store({
   modules,
-  getters
+  getters,
+  plugins: [dataState]
 })
 
 export default store;

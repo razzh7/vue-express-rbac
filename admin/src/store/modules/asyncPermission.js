@@ -25,9 +25,9 @@ const actions = {
   generatorRoutes({ commit }, Menu) {
     return new Promise(resolve => {
       console.log(Menu)
-      const asyncRoutes = fukeTree(delIdAndPidAndMapComponent(Menu))
+      const asyncRoutes = formatRouterTree(delIdAndPidAndMapComponent(Menu))
+      asyncRoutes.push({ path: '*', redirect: '/404', hidden: true }) // 加入404页面
       console.log('生成的routes',asyncRoutes)
-      console.log('fukeTree', fukeTree(asyncRoutes))
       commit('SET_ROUTES', asyncRoutes)
       resolve(asyncRoutes)
     })
@@ -55,21 +55,20 @@ function delIdAndPidAndMapComponent(Menu) {
 
   return Menu
 }
-function fukeTree(routes) {
+
+function formatRouterTree(routes) {
   let parents = routes.filter(p => p.pid == 0) // 找到所有顶级节点
   let children = routes.filter(c => c.pid != 0)
-  console.log('parents',parents)
-  console.log('children',children)
-  grTree(parents, children)
+  dataToTree(parents, children)
 
-  function grTree(parents, children) {
+  function dataToTree(parents, children) {
     parents.map(p => {
       children.map((c,i) => {
         if (p._id === c.pid) {
           let _c = JSON.parse(JSON.stringify(children))
           _c.splice(i,1)
 
-          grTree([c],_c)
+          dataToTree([c],_c)
 
           if (p.children) {
             p.children.push(c)

@@ -48,17 +48,7 @@ export const commonRoutes = [
     ]
   },
   nestedModule,
-  // {
-  //   path: '/github', // path中不加/相当于父组件路径/https://github.com/rzhAvenir
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'https://github.com/rzhAvenir',
-  //       meta: { title: 'Github', icon: 'el-icon-info' }
-  //     }
-  //   ]
-  // },
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 export const asyncRoutes = [
   {

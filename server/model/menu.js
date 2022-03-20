@@ -19,6 +19,9 @@ const Schema = new mongoose.Schema({
   redirect: {
     type: String
   },
+  hidden: {
+    type: Boolean
+  },
   icon: {
     type: String
   }
