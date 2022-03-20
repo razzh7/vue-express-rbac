@@ -1,14 +1,14 @@
 import $axios from "./request";
 
-// export function userInfo(data) {
-//   const url = '/userInfo'
-//   return $axios.get(url, data)
-// }
-
-// 获取菜单栏
+// 获取授权时菜单栏
 export function userInfo(data) {
   const url = '/roles/auth'
   return $axios.get(url, data)
+}
+
+export function authMenu(data) {
+  const url = '/roles/authMenu'
+  return $axios.post(url, data)
 }
 
 // 获取用户列表

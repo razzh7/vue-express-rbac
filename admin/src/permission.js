@@ -37,6 +37,7 @@ router.beforeEach(async (to, from, next) => {
         }
       }
     } else {
+      console.log('不会跳到这了吧')
       next({
         path: '/login',
         query: {

@@ -25,14 +25,14 @@ const actions = {
   generatorRoutes({ commit }, Menu) {
     return new Promise(resolve => {
       console.log(Menu)
-      const asyncRoutes = delIdAndPidAndMapComponent(Menu)
+      const asyncRoutes = fukeTree(delIdAndPidAndMapComponent(Menu))
       console.log('生成的routes',asyncRoutes)
+      console.log('fukeTree', fukeTree(asyncRoutes))
       commit('SET_ROUTES', asyncRoutes)
       resolve(asyncRoutes)
     })
   }
 }
-
 
 function delIdAndPidAndMapComponent(Menu) {
   for(let i = 0; i < Menu.length; i++) {
@@ -51,21 +51,40 @@ function delIdAndPidAndMapComponent(Menu) {
         title
       }
     }
-    // delete Menu[i]['_id']
-    // delete Menu[i]['pid']
   }
 
   return Menu
 }
+function fukeTree(routes) {
+  let parents = routes.filter(p => p.pid == 0) // 找到所有顶级节点
+  let children = routes.filter(c => c.pid != 0)
+  console.log('parents',parents)
+  console.log('children',children)
+  grTree(parents, children)
 
-// function componentMap(Menu) {
-//   for(let i = 0; i < Menu.length; i++) {
-//     const mapName = Menu[i].component
-//     if (Menu[i].component) {
-//       Menu[i].component = map[mapName]
-//     }
-//   }
-// }
+  function grTree(parents, children) {
+    parents.map(p => {
+      children.map((c,i) => {
+        if (p._id === c.pid) {
+          let _c = JSON.parse(JSON.stringify(children))
+          _c.splice(i,1)
+
+          grTree([c],_c)
+
+          if (p.children) {
+            p.children.push(c)
+          } else {
+            p.children = [c]
+          }
+
+        }
+      })
+    })
+  }
+
+  return parents
+}
+
 export default {
   namespaced: true,
   state,

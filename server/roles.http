@@ -36,8 +36,40 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhY
 
 ### 获取权限列表
 GET {{baseUrl}}/roles/list
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
 
 ### 获取菜单栏
 GET {{baseUrl}}/roles/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NjMwZTBlZDc2OTg1MDY4ZjliNCIsImlhdCI6MTY0NzE0ODk2MywiZXhwIjoxNjQ3NTA4OTYzfQ.dplWHi3A6TJyDTJkoQQe1s3Q7z-8zxm9QZY52wxqxmo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
+
+### 获取登录时角色菜单
+POST {{baseUrl}}/roles/authMenu
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
+
+{
+  "id": "623347eb325db85b2e23bd45"
+}
+
+### 角色授权
+POST {{baseUrl}}/roles/doAuth
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
+
+{
+  "id": "623347eb325db85b2e23bd45",
+  "menu_node": [
+    "622d8e5bf08bd631ed645466",
+    "622eaec9f08bd631ed645469",
+    "6231de06f08bd631ed64546c"
+  ]
+}
+
+### 查询当前角色权限
+POST {{baseUrl}}/roles/curAuth
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
+
+{
+  "id": "623347eb325db85b2e23bd45"
+}

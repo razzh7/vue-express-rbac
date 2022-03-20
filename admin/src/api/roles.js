@@ -1,4 +1,5 @@
 import $axios from "./request";
+import Qs from "qs";
 
 // 获取角色列表
 export function roleList() {
@@ -23,3 +24,10 @@ export function roleDelete(data) {
     const url = '/roles/delete'
     return $axios.post(url, data)
 }
+
+// 角色授权
+export function doAuthRoleRoutes(data) {
+    const url = '/roles/doAuth'
+    console.log(123142,Qs.stringify(data))
+    return $axios.post(url, data)
+  }

@@ -1,6 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import getters from "./getters"
+import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 const path = require('path');
 /**
@@ -20,6 +21,7 @@ files.keys().forEach(key => {
   let name = path.basename(key, '.js') // 去掉.js只拿路径 例: user.js -> user
   modules[name] = files(key).default || files(key)
 })
+console.log('我是导入的模块',modules)
 
 const store = new Vuex.Store({
   modules,

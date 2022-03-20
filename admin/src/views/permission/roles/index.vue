@@ -42,11 +42,32 @@
           <el-button type="primary" @click="dialogStatus==='create'?comfirmAddRoles():comfirmEditRoles()">确 定</el-button>
         </span>
     </el-dialog>
+    <el-dialog
+    :title="txt[dialogStatus]"
+    :visible.sync="dilogAuthIsShow"
+    width="25%">
+      菜单
+      <el-tree
+        ref="tree"
+        :data="menuTree" 
+        :props="defaultProps"
+        @node-click="handleNodeClick"
+        @check="handleNodeCheck"
+        node-key="_id"
+        show-checkbox
+        check-on-click-node>
+      </el-tree>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dilogAuthIsShow = false">取 消</el-button>
+          <el-button type="primary" @click="comfirmDoAuth">确 定</el-button>
+        </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { roleList, roleAdd, roleEdit, roleDelete } from '@/api/roles'
+import { roleList, roleAdd, roleEdit, roleDelete, doAuthRoleRoutes } from '@/api/roles'
+import { userInfo } from '@/api/userInfo'
 import { Message } from "element-ui"
 import { Notification } from 'element-ui';
 export default {
@@ -55,15 +76,25 @@ export default {
       dialogStatus: '',
       txt: {
         create: '添加角色',
-        edit: '编辑角色'
+        edit: '编辑角色',
+        auth: '角色授权'
       },
       dialogType: 'new',
       dilogIsShow: false,
+      dilogAuthIsShow: false,
       roleData: [],
       rolesForm: {
         role_name: '',
         description: ''
-      }
+      },
+      roleId: '', // 角色Id
+      menuTree: [],
+      roles_menu: [],
+      defaultProps: {
+        children: 'children',
+        label: 'title'
+      },
+      menIds: []
     }
   },
   created() {
@@ -99,8 +130,64 @@ export default {
         this.dilogIsShow = false
       }
     },
-    doAuth(row) {
-      console.log('进行授权',row)
+    async doAuth(row) {
+      this.dilogAuthIsShow = true
+      this.dialogStatus = 'auth'
+      this.roleId = row._id
+      console.log('rowId',row)
+      const res = await userInfo({id: this.roleId })
+      if (res.code === 0) {
+        const { menu, roles_menu } = res.data
+        this.menuTree = menu
+        this.roles_menu = roles_menu
+        this.getMenuId()
+        const datas = this.generateArr(menu)
+        this.$nextTick(() => {
+          this.$refs['tree'].setCheckedNodes(datas)
+        })
+        console.log('我是菜单', this.menuTree)
+        console.log('我是当前角色拥有的菜单权限', roles_menu)
+        console.log('datas',datas)
+      }
+
+    },
+    getMenuId() {
+      const Roles_Menu = this.roles_menu
+      let menuIds = []
+      for (const Menu of Roles_Menu) {
+        menuIds.push(Menu.menu_id)
+      }
+      this.menuIds = menuIds
+    },
+    generateArr(routes) {
+      let data = []
+      routes.forEach(route => {
+        if (this.menuIds.includes(route._id)) {
+          data.push(route)
+        }
+        if (route.children) {
+          const temp = this.generateArr(route.children)
+          if (temp.length > 0) {
+            data = [...data, ...temp]
+          }
+        }
+      })
+      return data
+    },
+    async comfirmDoAuth() {
+      const selectedRoutes = this.$refs['tree'].getCheckedKeys()
+      const datas = {
+        id: this.roleId,
+        menu_node: selectedRoutes
+      }
+      const res = await doAuthRoleRoutes((datas))
+      if (res.code === 200) {
+        this.dilogAuthIsShow = false
+        Message.success(res.msg)
+      } else {
+        Message.error('未执行')
+      }
+      console.log('选中的routes', datas)
     },
     editRole(row) {
       this.dialogStatus = 'edit'
@@ -131,6 +218,12 @@ export default {
         })
         this.getRolesList()
       }
+    },
+    handleNodeClick(data) {
+      // console.log('node',data)
+    },
+    handleNodeCheck(data) {
+      console.log('check', data)
     }
   }
 }

@@ -33,7 +33,7 @@ router.post('/login', urlencodedParser, async(req, res) => {
   const { username, password } = req.body
   const user = await Users.findOne({ username })
   if (!user) {
-    return res.send(utils.datas(304, null, '不存在这个用户，请检查用户名是否输入正确')) // 不允许用户重名
+    return res.send(utils.datas(400, null, '不存在这个用户，请检查用户名是否输入正确')) // 不允许用户重名
   }
 
   const match = await bcrypt.compare(password, user.password) // 用户传来的密码和用户数据库中的密码比较
@@ -47,6 +47,7 @@ router.post('/login', urlencodedParser, async(req, res) => {
       data: {
         user: {
           userId: userId._id,
+          roles_id: userId.role_id,
           token,
           msg: '登录成功'
         }

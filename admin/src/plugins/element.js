@@ -24,7 +24,8 @@ import {
   Message,
   Card,
   Select,
-  Option
+  Option,
+  Tree
 } from "element-ui";
 
 Vue.use(Form)
@@ -51,6 +52,6 @@ Vue.use(Dialog)
 Vue.use(Card)
 Vue.use(Select)
 Vue.use(Option)
-
+Vue.use(Tree)
 // message不需要使用Vue.use 否则刷新页面会自动弹窗
 Vue.prototype.$message = Message;

@@ -3,9 +3,11 @@ const router = express.Router()
 const auth = require('../utils/auth')
 const Roles = require('../model/roles')
 const Menu = require('../model/menu')
+const Roles_Menu = require('../model/roles_menu')
 const utils = require('../utils/data')
 const bodyParser = require('body-parser')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const qs = require('qs');
 
 // 获取所有角色
 router.get('/roles', auth.verifyToken, async (req, res) => {
@@ -49,32 +51,74 @@ router.post('/roles/delete', auth.verifyToken, urlencodedParser, async (req, res
   
 })
 
-// 获取角色权限列表
-router.get('/roles/list', auth.verifyToken, async(req, res) => {
-  const { id } = req.body // 后面再讲
-  const list = await Menu.find()
-  res.send(utils.datas(200, list, '获取权限列表成功！'))
+// 获取菜单栏——用于角色授权菜单显示与默认勾选
+router.get('/roles/auth', auth.verifyToken, urlencodedParser, async(req, res) => {
+  const { id } = req.query
+  getMenu().then(async (datas) => {
+    const menu = datas
+    const roles_menu = await Roles_Menu.find({
+      roles_id: id
+    })
+    return res.send(utils.datas(0, {
+      menu,
+      roles_menu
+    }, '获取用户菜单成功！'))
+  })
+})
+// 登录时获取角色对应的菜单栏
+router.post('/roles/authMenu', auth.verifyToken, urlencodedParser, async(req, res) => {
+  const result = qs.parse(req.body) // Resolve Error Cast to ObjectId failed for value "" (type string) at path "roles_id" for model "roles_menu"
+  const { id } = result
+  // const { id } = req.body
+  console.log('传来啥id啊',id)
+  const menu = await Roles_Menu.find({ roles_id: id }).populate('menu_id')
+  console.log('menu', menu)
+  if (menu) {
+    return res.send(utils.datas(200, menu))
+  }
+
+})
+// 角色授权
+router.post('/roles/doAuth', auth.verifyToken, urlencodedParser, async(req, res) => {
+  const result = qs.parse(req.body)
+  const { id, menu_node } = result
+  console.log('菜单id',menu_node)
+  // 1、删除Roles_Menu表中当前角色下的所有权限
+
+  await Roles_Menu.deleteMany({roles_id: id })
+
+  // 2、把当前角色的所有权限添加到Roles_Menu表中
+
+  for (const menu_id of menu_node) {
+    const roles_menu = new Roles_Menu({
+      roles_id: id,
+      menu_id: menu_id
+    })
+    await roles_menu.save()
+  }
+
+  return res.send(utils.datas(200, null, '角色授权成功！'))
 
 })
 
-// 获取菜单栏
-router.get('/roles/auth', auth.verifyToken, async(req, res) => {
-  const menu = await Menu.aggregate([
-      {
-        $lookup: {
-            from: 'user_menus',
-            localField: '_id',
-            foreignField: 'pid',
-            as: 'children'
-        }
-      },
-      {
-        $match: {
-            "pid": '0'
-        }
-      },
-  ])
-  return res.send(utils.datas(0, menu, '获取用户菜单成功！'))
-})
-
+function getMenu() {
+  return new Promise((resolve, reject) => {
+      const menu = Menu.aggregate([
+        {
+          $lookup: {
+              from: 'user_menus',
+              localField: '_id',
+              foreignField: 'pid',
+              as: 'children'
+          }
+        },
+        {
+          $match: {
+              "pid": '0'
+          }
+        },
+    ])
+    resolve(menu)
+  })
+}
 module.exports = router
