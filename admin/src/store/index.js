@@ -21,7 +21,7 @@ files.keys().forEach(key => {
   let name = path.basename(key, '.js') // 去掉.js只拿路径 例: user.js -> user
   modules[name] = files(key).default || files(key)
 })
-console.log('我是导入的模块',modules)
+
 const dataState = createPersistedState({
   paths: ['asyncPermission.routes', 'asyncPermission.asyncRoutes', 'user.role_id']
 })
