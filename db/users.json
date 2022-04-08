@@ -1,0 +1,22 @@
+{
+  "RECORDS": [
+    {
+      "_id": "6243c0e4257f64b65e165d0f",
+      "__v": "0",
+      "email": "136013779@qq.com",
+      "mobile": "13589756757",
+      "password": "$2b$10$4K2JNtG4Uz1p/nJlOYjfc.HKavQxMNT2DVZ.9gyGphYyJKKEuJJJq",
+      "role_id": "6243c68a670c4371234e7d74",
+      "username": "xiaohao"
+    },
+    {
+      "_id": "6243eb40bab5c2142c42cc75",
+      "__v": "0",
+      "email": "dsajlk@qq.com",
+      "mobile": "1232345325",
+      "password": "$2b$10$i4bIoLPsqF71txiykLTPnuhUNE1zZon.nt/4J/1SyFSI.o9IgLFZa",
+      "role_id": "6243eae8bab5c2142c42cc5e",
+      "username": "han"
+    }
+  ]
+}

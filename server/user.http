@@ -10,7 +10,7 @@ POST {{baseUrl}}/register
 Content-Type: application/json
 
 {
-  "username": "kf",
+  "username": "guigui",
   "password": "123123",
   "mobile": "13589756757",
   "email": "136013779@qq.com",
@@ -22,7 +22,7 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-  "username": "admin",
+  "username": "xiaohao",
   "password": "123123"
 }
 

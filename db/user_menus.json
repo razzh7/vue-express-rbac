@@ -1,0 +1,58 @@
+{
+  "RECORDS": [
+    {
+      "_id": "6243c570670c4371234e7d72",
+      "component": "Layout",
+      "icon": "el-icon-s-grid",
+      "name": "组件",
+      "path": "/table",
+      "pid": "0",
+      "title": "组件库"
+    },
+    {
+      "_id": "6243c62b670c4371234e7d73",
+      "component": "mixin",
+      "icon": null,
+      "name": "小组件",
+      "path": "mixin",
+      "pid": "6243c570670c4371234e7d72",
+      "title": "小组件"
+    },
+    {
+      "_id": "6243cddc670c4371234e7d77",
+      "component": "upload",
+      "icon": null,
+      "name": "上传",
+      "path": "upload",
+      "pid": "6243c570670c4371234e7d72",
+      "title": "上传"
+    },
+    {
+      "_id": "6243e628670c4371234e7d79",
+      "component": "Layout",
+      "icon": "el-icon-s-promotion",
+      "name": "权限管理",
+      "path": "/permission",
+      "pid": "0",
+      "title": "权限管理"
+    },
+    {
+      "_id": "6243e692670c4371234e7d7a",
+      "component": "roles",
+      "icon": null,
+      "name": "角色管理",
+      "path": "user",
+      "pid": "6243e628670c4371234e7d79",
+      "title": "角色管理"
+    },
+    {
+      "_id": "6243e70b670c4371234e7d7b",
+      "component": "user",
+      "icon": null,
+      "name": "权限分配",
+      "path": "roles",
+      "pid": "6243e628670c4371234e7d79",
+      "title": "权限分配"
+    }
+  ]
+}

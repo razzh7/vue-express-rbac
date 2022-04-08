@@ -62,7 +62,10 @@ const actions = {
   _userInfo({ commit }) {
     return new Promise((resolve, reject) => {
       const roleId = localStorage.getItem('roles_id')
+      // debugger
+      // console.log('roleId', roleId)
       authMenu({ id: roleId }).then(res => {
+        console.log('的哈萨克觉得哈萨克巨好看', res)
         if (res.code === 200) {
           const menu = handleMenu(res.data)
           commit('SET_ASYNC_ROUTER', menu)

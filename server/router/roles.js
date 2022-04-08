@@ -66,9 +66,12 @@ router.get('/roles/auth', auth.verifyToken, urlencodedParser, async(req, res) =>
 })
 // 登录时获取角色对应的菜单栏
 router.post('/roles/authMenu', auth.verifyToken, urlencodedParser, async(req, res) => {
+  console.log(123,req.body.id)
   const result = qs.parse(req.body) // Resolve Error Cast to ObjectId failed for value "" (type string) at path "roles_id" for model "roles_menu"
   const { id } = result
   const menu = await Roles_Menu.find({ roles_id: id }).populate('menu_id')
+  // const menu = await Roles_Menu.findById(id)
+  console.log('menu', menu)
   if (menu) {
     return res.send(utils.datas(200, menu))
   }

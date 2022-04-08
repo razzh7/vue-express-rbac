@@ -3,7 +3,7 @@
 
 ### 获取所有角色
 GET {{baseUrl}}/roles
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1NjAxOSwiZXhwIjoxNjQ4MDE2MDE5fQ.LRt6GNKXtKUFugIsFWapeUZVvvI775hSfeMqwncmyYs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDNjNDM5YmNlY2VkMTM1OWZlMTg5ZCIsImlhdCI6MTY0ODYwOTkxNiwiZXhwIjoxNjQ4OTY5OTE2fQ.r_HRNGm9L_ARze7w_HULSvzmZfGThpOnimM1Dommj5Y
 
 ### 添加用户角色
 POST {{baseUrl}}/roles/add
@@ -36,32 +36,32 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhY
 
 ### 获取权限列表
 GET {{baseUrl}}/roles/list
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDNjNDM5YmNlY2VkMTM1OWZlMTg5ZCIsImlhdCI6MTY0ODYwOTkxNiwiZXhwIjoxNjQ4OTY5OTE2fQ.r_HRNGm9L_ARze7w_HULSvzmZfGThpOnimM1Dommj5Y
 
 ### 获取菜单栏
 GET {{baseUrl}}/roles/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDNjNDM5YmNlY2VkMTM1OWZlMTg5ZCIsImlhdCI6MTY0ODYwOTkxNiwiZXhwIjoxNjQ4OTY5OTE2fQ.r_HRNGm9L_ARze7w_HULSvzmZfGThpOnimM1Dommj5Y
 
 ### 获取登录时角色菜单
 POST {{baseUrl}}/roles/authMenu
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDNjNDM5YmNlY2VkMTM1OWZlMTg5ZCIsImlhdCI6MTY0ODYwOTkxNiwiZXhwIjoxNjQ4OTY5OTE2fQ.r_HRNGm9L_ARze7w_HULSvzmZfGThpOnimM1Dommj5Y
 
 {
-  "id": "623347eb325db85b2e23bd45"
+  "id": "6243c68a670c4371234e7d74"
 }
 
 ### 角色授权
 POST {{baseUrl}}/roles/doAuth
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDNjNDM5YmNlY2VkMTM1OWZlMTg5ZCIsImlhdCI6MTY0ODYwOTkxNiwiZXhwIjoxNjQ4OTY5OTE2fQ.r_HRNGm9L_ARze7w_HULSvzmZfGThpOnimM1Dommj5Y
 
 {
-  "id": "623347eb325db85b2e23bd45",
+  "id": "6243c68a670c4371234e7d74",
   "menu_node": [
-    "622d8e5bf08bd631ed645466",
-    "622eaec9f08bd631ed645469",
-    "6231de06f08bd631ed64546c"
+    "6243c570670c4371234e7d72",
+    "6243c62b670c4371234e7d73",
+    "6243cddc670c4371234e7d77"
   ]
 }
 
@@ -71,5 +71,5 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmQ2NWFhYTI4YWRlOTM0MzZiZjVmMiIsImlhdCI6MTY0NzY1ODc2MSwiZXhwIjoxNjQ4MDE4NzYxfQ.D5lj-NXw-v7V8ZrGX6IdseBJB4jz_QyV6U2qgXQM2Rw
 
 {
-  "id": "623347eb325db85b2e23bd45"
+  "id": "6243c68a670c4371234e7d74"
 }
