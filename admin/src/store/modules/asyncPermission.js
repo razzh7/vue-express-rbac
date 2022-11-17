@@ -25,7 +25,6 @@ const actions = {
   generatorRoutes({ commit }, Menu) {
     return new Promise(resolve => {
       const asyncRoutes = formatRouterTree(delIdAndPidAndMapComponent(Menu))
-      console.log('后台动态路由', asyncRoutes)
       asyncRoutes.push({ path: '*', redirect: '/404', hidden: true }) // 加入404页面
       commit('SET_ROUTES', asyncRoutes)
       resolve(asyncRoutes)

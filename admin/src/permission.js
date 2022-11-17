@@ -24,14 +24,13 @@ router.beforeEach(async (to, from, next) => {
         try {
             const Menu = await store.dispatch('user/_userInfo') 
             const accessRoutes = await store.dispatch('asyncPermission/generatorRoutes', Menu)
-            console.log('hou', accessRoutes)
             for(let i = 0; i < accessRoutes.length; i++) {
               let element = accessRoutes[i]
               router.addRoute(element)
             }
             next({ ...to, replace: true })
         } catch(error) {
-          console.log(error)
+          console.error(error)
         }
       }
     } else {
