@@ -2,67 +2,63 @@
   <div class="login">
     <div class="login-form">
       <div class="r-title">
-        <img class="logo" src="../../assets/logo/logo.png" alt="Vue Admin Logo">
+        <img class="logo" src="../../assets/logo/logo.png" alt="Vue Admin Logo" />
         <span>Vue Admin WebApp</span>
       </div>
-        <el-form :model="loginInfo" :rules="rules" ref="ruleForm">
-          <el-form-item prop="username"> 
-            <el-input
-              v-model="loginInfo.username"
-              prefix-icon="el-icon-user">
-            </el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input
-              v-model="loginInfo.password"
-              prefix-icon="el-icon-lock"
-              type="password">
-            </el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submit">登录</el-button>
-          </el-form-item>
-        </el-form>
+      <el-form :model="loginInfo" :rules="rules" ref="ruleForm">
+        <el-form-item prop="username">
+          <el-input v-model="loginInfo.username" prefix-icon="el-icon-user"> </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input v-model="loginInfo.password" prefix-icon="el-icon-lock" type="password">
+          </el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submit">登录</el-button>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
-      loginInfo: { // 用户名和密码
-        username: "admin",
-        password: "123123"
+      loginInfo: {
+        // 用户名和密码
+        username: 'xiaohao',
+        password: '123123',
       },
-      rules: { // 表单验证
+      rules: {
+        // 表单验证
         username: [
-            {require: true, message: '请输入账号', trigger: 'blur'},
-            {min: 3, max: 8, message: '账号长度在3到8个字符', trigger: 'blur'}
+          { require: true, message: '请输入账号', trigger: 'blur' },
+          { min: 3, max: 8, message: '账号长度在3到8个字符', trigger: 'blur' },
         ],
         password: [
-          {require: true, message: '请输入密码', trigger: 'blur'},
-          {min: 3, max: 8, message: '密码长度在3到8个字符', trigger: 'blur'}
-        ]
-      }
+          { require: true, message: '请输入密码', trigger: 'blur' },
+          { min: 3, max: 8, message: '密码长度在3到8个字符', trigger: 'blur' },
+        ],
+      },
     }
   },
   methods: {
     submit() {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
-          this.$store.dispatch('user/_login',this.loginInfo).then(res => {
-            if (res.code === 0 ) {
-              this.$router.push({ path:this.$route.query.redirect }).catch((e) => e)
+          this.$store.dispatch('user/_login', this.loginInfo).then((res) => {
+            if (res.code === 0) {
+              this.$router.push({ path: this.$route.query.redirect }).catch((e) => e)
             }
           })
         } else {
           return
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -70,7 +66,7 @@ export default {
 .login {
   position: relative;
   height: 100%;
-  background: url("../../assets/login/login.jpeg");
+  background: url('../../assets/login/login.jpeg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
 
@@ -78,7 +74,7 @@ export default {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: 500px;
     height: 300px;
     padding: 30px;
@@ -99,7 +95,6 @@ export default {
         vertical-align: middle;
       }
     }
-
   }
 }
 </style>
